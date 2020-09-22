@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>course</title>
+</head>
+<body>
+</body>
+
+<script>
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+
+    today = yyyy + '-' + mm + '-' + dd;
+
+    var getParams = function (url) {
+        var params = {};
+        var parser = document.createElement('a');
+        parser.href = url;
+        var query = parser.search.substring(1);
+        var vars = query.split('&');
+        for (var i = 0; i < vars.length; i++) {
+            var pair = vars[i].split('=');
+            params[pair[0]] = decodeURIComponent(pair[1]);
+        }
+        return params;
+    };
+
+    var params = getParams(window.location.href);
+    var id = params["id"]
+
+    full_url = "http://219.216.96.73/pyxx/App_Ajax/GetkcHandler.ashx?kcdate=" + today + "&xh=" + id;
+
+    // window.location.href = full_url;
+
+    // var iframe = document.createElement('iframe');
+    // iframe.src = full_url;
+    // document.body.appendChild(iframe);
+    // var doc = document.getElementById('iframee');
+    // doc.src = full_url;
+    doc_string = "<iframe src=\""+ full_url+"\" title=\"description\" id=\"iframee\">\n"
+    document.write(doc_string)
+
+
+</script>
+
+</html>
